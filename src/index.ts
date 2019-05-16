@@ -1,8 +1,14 @@
-import * as PIXI from "pixi.js"
-import './css//main.css'
+import * as PIXI from "pixi.js";
+import './css//main.css';
+import chick from './assets/chick.png';
 
 const app = new PIXI.Application({ backgroundColor: 0x1099bb, resolution: window.devicePixelRatio || 1 });
 document.body.appendChild(app.view);
+
+const chicken = PIXI.Sprite.from(chick);
+chicken.anchor.set(0.5);
+chicken.x = app.screen.width / 2;
+chicken.y = 128;
 
 const style = new PIXI.TextStyle({
     fontFamily: 'Arial',
@@ -26,4 +32,5 @@ basicText.anchor.set(0.5);
 basicText.x = app.screen.width / 2;
 basicText.y = app.screen.height / 2;
 
+app.stage.addChild(chicken);
 app.stage.addChild(basicText);
