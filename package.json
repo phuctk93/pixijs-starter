@@ -1,0 +1,29 @@
+{
+  "name": "pixijs-template",
+  "version": "2019.5.16",
+  "description": "Pixijs template is setup project with PixiJS + FuseBox",
+  "main": "src/index.html",
+  "dependencies": {
+    "fuse-box": "^3.7.1",
+    "terser": "^3.17.0",
+    "typescript": "^3.4.5",
+    "uglify-js": "^3.5.12"
+  },
+  "devDependencies": {
+    "pixi.js": "^5.0.2"
+  },
+  "scripts": {
+    "start": "node fuse",
+    "build": "node fuse build",
+    "test": "node fuse test"
+  },
+  "keywords": [
+    "pixi",
+    "pixijs",
+    "fusebox",
+    "typescript",
+    "javascript"
+  ],
+  "author": "phuctk93",
+  "license": "MIT"
+}
