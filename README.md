@@ -1,6 +1,6 @@
 # PIXIJS TEMPLATE WITH FUSEBOX
 
-A starter template start with [pixi.js]("https://pixijs.io") and [fusebox]("https://fuse-box.org").
+A starter template with [pixi.js]("https://pixijs.io") and [fusebox]("https://fuse-box.org").
 
 ## Description
 
