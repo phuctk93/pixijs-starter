@@ -1,5 +1,5 @@
-const { src, task, exec, context } = require("fuse-box/sparky");
-const { FuseBox, WebIndexPlugin, CSSPlugin, CSSResourcePlugin, QuantumPlugin, CopyPlugin } = require("fuse-box");
+const { src, task, exec, context, watch } = require("fuse-box/sparky");
+const { FuseBox, WebIndexPlugin, CSSPlugin, CSSResourcePlugin, QuantumPlugin } = require("fuse-box");
 
 context({
     isProduction: false,
@@ -9,7 +9,6 @@ context({
             target: "browser@es5",
             output: "dist/$name.js",
             plugins: [
-                CopyPlugin({files: [".png", ".jpg", ".svg"]}),
                 [
                     CSSResourcePlugin({ dist: "dist/css" }),
                     CSSPlugin()
@@ -31,29 +30,37 @@ context({
     }
 });
 
-task("default", async context => {
+task("default", ["&watch-static"], async context => {
     const fuse = context.getConfig();
     fuse.dev({
-        open: true,
+        //open: true,
         port: 8080
     }); // launch http server
     fuse.bundle("app")
-    .shim({
+    /*.shim({
         "pixi.js": {exports: "PIXI"}
-    })
+    })*/
     .hmr()
     .watch()
     .instructions(">index.ts");
     await fuse.run();
 });
 
-task("build", async context => {
+task("build", ["copy-static"], async context => {
     context.isProduction = true;
     const fuse = context.getConfig();
     fuse.bundle("app")
-        .shim({
+        /*.shim({
             "pixi.js": {exports: "PIXI"}
-        })
+        })*/
         .instructions(">index.ts");
     await fuse.run();
+});
+
+task("copy-static", () => {
+    return src("static/**/**.*").clean("dist/static").dest("dist/")
+});
+
+task("watch-static", () => {
+    return watch("static/**/**.*").clean("dist/static").dest("dist/")
 });
